@@ -1,13 +1,13 @@
-import serial
+import usbserial4a
 from rich.console import Console
 from rich.panel import Panel
 import time
 
 console = Console()
 
-# Change this to your Pico's serial port (e.g., 'COM3' on Windows, '/dev/ttyACM0' on Linux)
-SERIAL_PORT = 'COM3'
-BAUDRATE = 115200
+# Replace with your device's actual IDs
+VENDOR_ID = 0x1234  # e.g., 1027
+PRODUCT_ID = 0x5678 # e.g., 24577
 
 def get_icon_and_color(percent):
     if percent > 70:
@@ -34,15 +34,19 @@ def draw_moisture(percent, depth, status):
     console.clear()
     console.print(panel)
 
-with serial.Serial(SERIAL_PORT, BAUDRATE, timeout=1) as ser:
-    while True:
-        line = ser.readline().decode().strip()
-        if not line:
-            continue
-        percent, depth, value = line.split(",")
-        percent = float(percent)
-        depth = int(depth)
-        value = int(value)
-        status = "Wet" if value < 60000 else "Dry"
-        draw_moisture(percent, depth, status)
-        time.sleep(0.5)
+def main():
+    device = usbserial4a.get_usb_device(VENDOR_ID, PRODUCT_ID)
+    if not device:
+        print("No USB device found.")
+        return
+
+    with device.serial_port(baudrate=115200) as serial:
+        print("Serial port opened successfully.")
+        while True:
+            data = serial.read(1024)
+            if data:
+                print(f"Received: {data.decode(errors='ignore')}")
+            time.sleep(0.1)
+
+if __name__ == "__main__":
+    main()

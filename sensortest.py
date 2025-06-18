@@ -17,6 +17,9 @@ while True:
     if Depth > 6:
         Depth = 6
 
-    print("{:.2f},{},{}".format(percent, Depth, value))
+    if value >= 60000:
+        print("Dry | Moisture: {:.2f}% | Depth: {}/6".format(percent, Depth))
+    else:
+        print("Wet | Moisture: {:.2f}% | Depth: {}/6".format(percent, Depth))
     sleep(0.5)
     

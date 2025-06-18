@@ -43,6 +43,8 @@ dependencies = [
     { name = "mpremote" },
     { name = "pyserial" },
     { name = "rich" },
+    { name = "usb4a" },
+    { name = "usbserial4a" },
 ]
 
 [package.metadata]
@@ -50,6 +52,8 @@ requires-dist = [
     { name = "mpremote", specifier = ">=1.25.0" },
     { name = "pyserial", specifier = ">=3.5" },
     { name = "rich", specifier = ">=14.0.0" },
+    { name = "usb4a", specifier = ">=0.3.0" },
+    { name = "usbserial4a", specifier = ">=0.4.0" },
 ]
 
 [[package]]
@@ -82,3 +86,21 @@ sdist = { url = "https://files.pythonhosted.org/packages/a1/53/830aa4c3066a8ab0a
 wheels = [
     { url = "https://files.pythonhosted.org/packages/0d/9b/63f4c7ebc259242c89b3acafdb37b41d1185c07ff0011164674e9076b491/rich-14.0.0-py3-none-any.whl", hash = "sha256:1c9491e1951aac09caffd42f448ee3d04e58923ffe14993f6e83068dc395d7e0", size = 243229 },
 ]
+
+[[package]]
+name = "usb4a"
+version = "0.3.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/dc/d7/0606705ffdfd474b31a323a88b7c20264ad5d396e11e233fe1d33bf9c067/usb4a-0.3.0.tar.gz", hash = "sha256:5e93ed85c3c5064b2f08d1719a3c4056a46ce5fed9538f8ded5c6edd9b4a6eb3", size = 2586 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/34/fb/a4c30a258420f1f4c82959d44397add3261029a658bf5a589fc7550b82d1/usb4a-0.3.0-py3-none-any.whl", hash = "sha256:f4a15055f7ea15c5a3d75c1f32a2e90a259d3c94bfa902269307fde0691019bf", size = 2962 },
+]
+
+[[package]]
+name = "usbserial4a"
+version = "0.4.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "usb4a" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/d0/0a/362db66fb1474cc7c25ba39f9dce1add285fb1ee684c76c436b028aadb05/usbserial4a-0.4.0.tar.gz", hash = "sha256:0777e9cc0bad0d8fccc27f64af3e849062765e0c5059d78ef90cffa825413178", size = 21540 }

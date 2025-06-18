@@ -8,6 +8,8 @@ dependencies = [
     "mpremote>=1.25.0",
     "pyserial>=3.5",
     "rich>=14.0.0",
+    "usb4a>=0.3.0",
+    "usbserial4a>=0.4.0",
 ]
 authors = [
     { name = "Ishan Kaim" }

@@ -25,11 +25,8 @@ def draw_moisture(percent, depth, status):
     status_text = f"[bold {color}]{icon} {status}[/bold {color}]"
     percent_text = f"[bold]{percent:.1f}%[/bold] Moisture"
     depth_text = f"Depth: [bold]{depth}/6[/bold]"
-    alert_text = ""
-    if depth >= 6:
-        alert_text = "[bold red blink]CRITICAL: Sensor at maximum depth! Risk of drowning![/bold red blink]\n"
     panel = Panel(
-        f"{alert_text}{status_text}\n\n{bar}\n\n{percent_text}\n{depth_text}",
+        f"{status_text}\n\n{bar}\n\n{percent_text}\n{depth_text}",
         title="[b]Moisture Sensor Demo[/b]",
         subtitle="Created by Ishan Kaim",
         border_style=color
@@ -42,13 +39,10 @@ with serial.Serial(SERIAL_PORT, BAUDRATE, timeout=1) as ser:
         line = ser.readline().decode().strip()
         if not line:
             continue
-        try:
-            percent, depth, value = line.split(",")
-            percent = float(percent)
-            depth = int(depth)
-            value = int(value)
-            status = "Wet" if value < 60000 else "Dry"
-            draw_moisture(percent, depth, status)
-        except Exception as e:
-            console.print(f"[red]Error parsing line:[/red] {line} ({e})")
+        percent, depth, value = line.split(",")
+        percent = float(percent)
+        depth = int(depth)
+        value = int(value)
+        status = "Wet" if value < 60000 else "Dry"
+        draw_moisture(percent, depth, status)
         time.sleep(0.5)
